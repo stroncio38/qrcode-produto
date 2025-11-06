@@ -3,52 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informações do Seu Produto</title>
+    <title>Informações Técnicas do Produto</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e9ecef; /* Cinza claro de fundo */
+            color: #343a40;
             margin: 0;
             padding: 20px;
-            text-align: center;
         }
         .container {
-            max-width: 600px;
-            margin: 40px auto;
+            max-width: 800px;
+            margin: 30px auto;
             padding: 30px;
             background-color: #ffffff;
             border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: left;
         }
         h1 {
-            color: #28a745; /* Verde de sucesso */
-            margin-bottom: 15px;
-        }
-        p {
+            color: #007bff; /* Azul primário */
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
             margin-bottom: 20px;
-            line-height: 1.6;
         }
-        .sucesso {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
+        h2 {
+            color: #343a40;
+            margin-top: 25px;
+            font-size: 1.2em;
+        }
+        .info-item {
+            margin-bottom: 15px;
+            padding-left: 15px;
+            border-left: 3px solid #ced4da;
+        }
+        .info-item strong {
+            display: inline-block;
+            width: 150px; /* Garante alinhamento */
+            color: #555;
+        }
+        .pecas ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .pecas li {
+            background-color: #f8f9fa;
+            margin-bottom: 8px;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #dee2e6;
+        }
+        .pdf-link a {
+            color: #dc3545; /* Vermelho para PDF */
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Teste de Fluxo QR Code Finalizado!</h1>
+        <h1>Informações Técnicas do Produto</h1>
         
-        <div class="sucesso">
-            <p><strong>Parabéns!</strong> Você chegou na página de destino correta!</p>
-            <p>Este link funcionou via internet, o que é essencial para seu projeto.</p>
+        <div class="info-item">
+            <strong>Nome do Produto:</strong> Refrigerador 3 Portas - Modelo XYZ
+        </div>
+        <div class="info-item">
+            <strong>Data de Fabricação:</strong> 
+            <script>
+                // Cálculo da data de ontem (para simular um dado dinâmico)
+                const hoje = new Date();
+                const ontem = new Date(hoje);
+                ontem.setDate(hoje.getDate() - 1);
+                
+                const opcoesData = { year: 'numeric', month: '2-digit', day: '2-digit' };
+                document.write(ontem.toLocaleDateString('pt-BR', opcoesData));
+            </script>
         </div>
 
-        <p>Agora que a linkagem está correta, o próximo passo é fazer o <strong>Backend</strong> (como Node.js) preencher esta página com as informações do produto!</p>
+        <div class="info-item pdf-link">
+            <strong>Desenho Técnico:</strong> 
+            <a href="#" target="_blank">Visualizar Desenho (Link Simulado)</a>
+        </div>
+
+        <h2>Componentes Usados</h2>
+        <div class="pecas">
+            <ul>
+                <li><strong>Código REF-PRT-A1:</strong> Prateleira Principal (Substituível)</li>
+                <li><strong>Código REF-COMP-Z9:</strong> Compressor Inverter - (Peça Crítica)</li>
+                <li><strong>Código REF-LED-05:</strong> Lâmpada LED Interna</li>
+                <li>**Outras peças...**</li>
+            </ul>
+        </div>
     </div>
 </body>
 </html>
