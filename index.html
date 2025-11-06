@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de QR Code de Teste</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .container { max-width: 500px; margin: 0 auto; text-align: center; }
+        #qrcode { margin: 20px auto; width: fit-content; border: 1px solid #ccc; padding: 10px;}
+        input[type="text"], button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body onload="carregarURL()">
+    <div class="container">
+        <h2>Gerador de QR Code de Teste Local</h2>
+
+        <p>A URL de destino é o caminho para o arquivo <code>pagina_destino.html</code> no seu computador.</p>
+
+        <label for="urlInput">URL de Destino:</label>
+        <input type="text" id="urlInput" value="" readonly>
+        
+        <button onclick="gerarQRCode()">Gerar e Recarregar QR Code</button>
+
+        <hr>
+
+        <h3>Seu QR Code:</h3>
+        <div id="qrcode">
+            </div>
+        <p style="font-size: small;">Escaneie o código acima com seu celular para testar!</p>
+    </div>
+
+    <script>
+        var qrcode;
+
+        function carregarURL() {
+            // Esta função garante que a URL usada será a URL COMPLETA do arquivo de destino
+            // Isso funciona bem para testes locais.
+            const urlDestino = window.location.href.replace('gerador_qr.html', 'pagina_destino.html');
+            
+            document.getElementById("urlInput").value = urlDestino;
+
+            // Inicializa o QR Code
+            qrcode = new QRCode(document.getElementById("qrcode"), {
+                text: urlDestino,
+                width: 200,
+                height: 200,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        }
+
+        function gerarQRCode() {
+            const url = document.getElementById("urlInput").value;
+            const qrcodeDiv = document.getElementById("qrcode");
+            
+            // Limpa o QR Code anterior
+            qrcodeDiv.innerHTML = ""; 
+            
+            // Gera o novo QR Code
+            qrcode = new QRCode(qrcodeDiv, {
+                text: url,
+                width: 200,
+                height: 200,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+            alert("QR Code gerado com o caminho local! Agora escaneie com seu celular.");
+        }
+    </script>
+</body>
+</html>
