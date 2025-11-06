@@ -6,28 +6,33 @@
     <title>Gerador de QR Code de Teste</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        .container { max-width: 500px; margin: 0 auto; text-align: center; }
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9;}
+        .container { max-width: 500px; margin: 0 auto; text-align: center; padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);}
         #qrcode { margin: 20px auto; width: fit-content; border: 1px solid #ccc; padding: 10px;}
         input[type="text"], button {
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
             box-sizing: border-box;
+            border-radius: 4px;
         }
         button {
             background-color: #28a745;
             color: white;
             border: none;
             cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #218838;
         }
     </style>
 </head>
 <body onload="carregarURL()">
     <div class="container">
-        <h2>Gerador de QR Code de Teste Local</h2>
+        <h2>Gerador de QR Code de Teste</h2>
 
-        <p>A URL de destino é o caminho para o arquivo <code>pagina_destino.html</code> no seu computador.</p>
+        <p>O link gerado levará para o arquivo <code>pagina_destino.html</code>.</p>
 
         <label for="urlInput">URL de Destino:</label>
         <input type="text" id="urlInput" value="" readonly>
@@ -46,15 +51,25 @@
         var qrcode;
 
         function carregarURL() {
-            // Esta função garante que a URL usada será a URL COMPLETA do arquivo de destino
-            // Isso funciona bem para testes locais.
-            const urlDestino = window.location.href.replace('gerador_qr.html', 'pagina_destino.html');
+            // Pega a URL atual do navegador (ex: .../gerador_qr.html)
+            let urlAtual = window.location.href;
             
-            document.getElementById("urlInput").value = urlDestino;
+            // 1. Remove o nome do arquivo atual ('gerador_qr.html')
+            let urlBase = urlAtual.replace('gerador_qr.html', '');
+            
+            // 2. Garante que a URL base termine com uma barra '/'
+            if (!urlBase.endsWith('/')) {
+                urlBase += '/';
+            }
 
-            // Inicializa o QR Code
+            // 3. Define o link COMPLETO e CORRETO para a página de destino
+            const urlDestinoCompleta = urlBase + 'pagina_destino.html';
+            
+            document.getElementById("urlInput").value = urlDestinoCompleta;
+
+            // Inicializa o QR Code com o link correto
             qrcode = new QRCode(document.getElementById("qrcode"), {
-                text: urlDestino,
+                text: urlDestinoCompleta,
                 width: 200,
                 height: 200,
                 colorDark : "#000000",
@@ -79,7 +94,7 @@
                 colorLight : "#ffffff",
                 correctLevel : QRCode.CorrectLevel.H
             });
-            alert("QR Code gerado com o caminho local! Agora escaneie com seu celular.");
+            alert("QR Code atualizado! Escaneie com seu celular para verificar se aponta para 'pagina_destino.html'.");
         }
     </script>
 </body>
