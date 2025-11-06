@@ -17,25 +17,25 @@
             border-radius: 4px;
         }
         button {
-            background-color: #28a745;
+            background-color: #007bff;
             color: white;
             border: none;
             cursor: pointer;
             font-weight: bold;
         }
         button:hover {
-            background-color: #218838;
+            background-color: #0056b3;
         }
     </style>
 </head>
-<body onload="carregarURL()">
+<body onload="inicializarGerador()">
     <div class="container">
         <h2>Gerador de QR Code de Teste</h2>
 
         <p>O link gerado levará para o arquivo <code>pagina_destino.html</code>.</p>
 
-        <label for="urlInput">URL de Destino:</label>
-        <input type="text" id="urlInput" value="" readonly>
+        <label for="urlInput">URL de Destino (Verifique o final):</label>
+        <input type="text" id="urlInput" value="https://stroncio38.github.io/qrcode-produto/pagina_destino.html" readonly>
         
         <button onclick="gerarQRCode()">Gerar e Recarregar QR Code</button>
 
@@ -49,27 +49,13 @@
 
     <script>
         var qrcode;
+        // A URL correta para o seu destino no GitHub Pages
+        const URL_DESTINO_FIXA = "https://stroncio38.github.io/qrcode-produto/pagina_destino.html";
 
-        function carregarURL() {
-            // Pega a URL atual do navegador (ex: .../gerador_qr.html)
-            let urlAtual = window.location.href;
-            
-            // 1. Remove o nome do arquivo atual ('gerador_qr.html')
-            let urlBase = urlAtual.replace('gerador_qr.html', '');
-            
-            // 2. Garante que a URL base termine com uma barra '/'
-            if (!urlBase.endsWith('/')) {
-                urlBase += '/';
-            }
-
-            // 3. Define o link COMPLETO e CORRETO para a página de destino
-            const urlDestinoCompleta = urlBase + 'pagina_destino.html';
-            
-            document.getElementById("urlInput").value = urlDestinoCompleta;
-
-            // Inicializa o QR Code com o link correto
+        function inicializarGerador() {
+            // Gera o QR Code na inicialização da página
             qrcode = new QRCode(document.getElementById("qrcode"), {
-                text: urlDestinoCompleta,
+                text: URL_DESTINO_FIXA,
                 width: 200,
                 height: 200,
                 colorDark : "#000000",
@@ -79,22 +65,20 @@
         }
 
         function gerarQRCode() {
-            const url = document.getElementById("urlInput").value;
             const qrcodeDiv = document.getElementById("qrcode");
             
-            // Limpa o QR Code anterior
+            // Limpa o QR Code anterior e gera o novo com a URL correta
             qrcodeDiv.innerHTML = ""; 
             
-            // Gera o novo QR Code
             qrcode = new QRCode(qrcodeDiv, {
-                text: url,
+                text: URL_DESTINO_FIXA,
                 width: 200,
                 height: 200,
                 colorDark : "#000000",
                 colorLight : "#ffffff",
                 correctLevel : QRCode.CorrectLevel.H
             });
-            alert("QR Code atualizado! Escaneie com seu celular para verificar se aponta para 'pagina_destino.html'.");
+            alert("QR Code atualizado! Escaneie com seu celular.");
         }
     </script>
 </body>
